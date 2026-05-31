@@ -5,3 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "argonaut"
 version = "0.0.1"
+dependencies = [
+    "wxPython",
+    "GitPython",
+]
+
+

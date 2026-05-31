@@ -64,6 +64,9 @@ class ProjectCreator(Creator):
         self.logger.info(f"Cloned successfully to {self.local_clone_path.absolute()}")
 
         self.add_basic_project_json()
+
+        self.add_workflow_yaml()
+
         regenerate_project_readme(self.local_clone_path)
         git_commit_and_push(self.local_clone_path, "added README")
         self.logger.info("Added README")
@@ -101,6 +104,51 @@ class ProjectCreator(Creator):
         }
         with open(self.local_clone_path / PROJECT_JSON_PATH, "w+") as file:
             json.dump(json_info, file, indent=4)
+
+    def add_workflow_yaml(self):
+        workflow_path = self.local_clone_path / ".github" / "workflows"
+        workflow_path.mkdir(exist_ok=True, parents=True)
+        with open(workflow_path / "update_submodules.yml", "w+") as file:
+            file.write("""
+name: Update Submodules
+
+on:
+ schedule:
+    - cron: '17 05 * * *'
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout top-level repo
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update submodules to latest
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@users.noreply.github.com"
+
+          git submodule foreach '
+            git fetch origin
+            branch=$(git config -f $toplevel/.gitmodules submodule.$name.branch || echo main)
+            git checkout origin/$branch
+          '
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git commit -m "Automatically pulled submodules"
+          git push origin main
+""")
 
 
 def regenerate_project_readme(local_project_root: Path):

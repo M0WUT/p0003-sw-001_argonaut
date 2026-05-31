@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 # Third party imports
+from git import Repo
 
 # Local imports
 from argonaut.misc.os import (
@@ -16,16 +17,6 @@ from argonaut.misc.os import (
     get_temp_dir_path,
 )
 from argonaut.gui.dialog import ask_question, get_folder_input, show_error
-
-# Third party but need to load the show_error method first
-try:
-    from git import Repo
-except ImportError:
-    show_error(
-        "Plugin requirements not installed. Please use Kicad Command Prompt and "
-        f"`pip install -r {Path(__file__).parent.absolute()}/requirements.txt`",
-        "Modules not installed",
-    )
 
 
 @dataclass
