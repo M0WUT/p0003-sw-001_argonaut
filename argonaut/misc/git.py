@@ -105,15 +105,13 @@ def git_clone(
     repo_name: str,
     clone_location: Path,
     create_dir: bool = True,
-    check_existence_before_clone: bool = True,
     show_error_window: bool = True,
 ) -> bool:
 
     if create_dir:
         clone_location.mkdir(parents=True)
 
-    if check_existence_before_clone:
-        check_github_repo_exists(repo_owner, repo_name)
+    check_github_repo_exists(repo_owner, repo_name)
 
     try:
         run_shell_command(

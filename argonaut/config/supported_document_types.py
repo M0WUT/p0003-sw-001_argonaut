@@ -65,7 +65,9 @@ SUPPORTED_DOCUMENT_TYPES = sorted(
 
 
 def get_document_type_from_abbreviation(abbr: str) -> DocumentType:
-    possible_matches = [x for x in SUPPORTED_DOCUMENT_TYPES if x.abbreviation == abbr]
+    possible_matches = [
+        x for x in SUPPORTED_DOCUMENT_TYPES if x.abbreviation.lower() == abbr.lower()
+    ]
     assert len(possible_matches) == 1, "Multiple document types have same abbreviation"
     return possible_matches[0]
 
