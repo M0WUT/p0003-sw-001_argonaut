@@ -69,8 +69,9 @@ def update_project(
     with DocumentTracker(
         git_info.repo_owner, git_info.repo_name, PROJECT_JSON_PATH
     ) as doc_tracker:
-        for doc_type, docs in doc_tracker.project_json["documents"].items():
-            if get_document_type_from_abbreviation(doc_type).separate_repo is False:
+        for doc_type_str, docs in doc_tracker.project_json["documents"].items():
+            doc_type = get_document_type_from_abbreviation(doc_type_str)
+            if doc_type.separate_repo is False:
                 # Document is within top level repo
                 continue
 
@@ -81,7 +82,9 @@ def update_project(
                     doc_info["url"]
                 )
                 doc_path = (
-                    project_path / f"{doc_number}_{doc_name.title().replace(' ', '')}"
+                    project_path
+                    / doc_type.relative_path
+                    / f"{doc_number}_{doc_name.title().replace(' ', '')}"
                 )
                 if (
                     update_document_in_separate_repo(
