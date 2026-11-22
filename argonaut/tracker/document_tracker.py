@@ -4,7 +4,7 @@ import json
 # Third party imports
 
 # Local imports
-from argonaut.config.document_type import DocumentType
+from argonaut.document_types.document_type import DocumentType
 from argonaut.tracker.tracker import Tracker
 
 

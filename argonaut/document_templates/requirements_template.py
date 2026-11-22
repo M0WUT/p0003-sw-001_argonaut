@@ -5,7 +5,7 @@ from pathlib import Path
 
 # Local imports
 from argonaut.misc.git import generate_github_repo_url
-from argonaut.config.document_type import DocumentType
+from argonaut.document_types.document_type import DocumentType
 from argonaut.creator.creator import generate_folder_name
 
 

@@ -4,10 +4,10 @@ from pathlib import Path
 # Third party imports
 
 # Local imports
-from argonaut.templates.minimal_template import init_minimal_folder
-from argonaut.config.document_type import DocumentType
-from argonaut.templates.requirements_template import init_requirements_folder
-from argonaut.templates.pcb_template import init_pcb_folder
+from argonaut.document_templates.minimal_template import init_minimal_folder
+from argonaut.document_types.document_type import DocumentType
+from argonaut.document_templates.requirements_template import init_requirements_folder
+from argonaut.document_templates.pcb_template import init_pcb_folder
 
 SUPPORTED_DOCUMENT_TYPES = sorted(
     [

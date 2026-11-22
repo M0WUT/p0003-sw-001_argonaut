@@ -20,7 +20,7 @@ from argonaut.misc.git import (
     git_pull,
     git_pull_including_submodules,
 )
-from argonaut.config.supported_document_types import (
+from argonaut.document_types.supported_document_types import (
     SUPPORTED_DOCUMENT_TYPES,
     get_document_type_from_abbreviation,
 )

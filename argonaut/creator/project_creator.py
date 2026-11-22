@@ -6,8 +6,8 @@ import json
 # Third party imports
 
 # Local imports
-from argonaut.templates.pcb_template import create_pcb_readme_table
-from argonaut.config.supported_document_types import SUPPORTED_DOCUMENT_TYPES
+from argonaut.document_templates.pcb_template import create_pcb_readme_table
+from argonaut.document_types.supported_document_types import SUPPORTED_DOCUMENT_TYPES
 from argonaut.gui.dialog import show_info
 from argonaut.misc.git import (
     generate_github_repo_url,

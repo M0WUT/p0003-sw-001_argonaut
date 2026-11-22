@@ -258,15 +258,17 @@ def git_add_submodule(
             )
 
 
-def git_pull(local_folder: Path, show_error_window: bool = True):
+def git_pull(local_folder: Path, show_error_window: bool = True) -> bool:
     try:
         run_shell_command(["git", "-C", f"{local_folder}", "pull"])
+        return True
     except subprocess.CalledProcessError:
         if show_error_window:
             show_error(
                 f'Failed to pull changes to repo "{local_folder}"',
                 "Git pull failed",
             )
+        return False
 
 
 def git_pull_including_submodules(local_folder: Path, show_error_window: bool = True):

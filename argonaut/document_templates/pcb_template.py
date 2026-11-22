@@ -14,7 +14,7 @@ from argonaut.misc.git import (
     generate_github_repo_url,
     set_github_pages_source_to_actions,
 )
-from argonaut.config.document_type import DocumentType
+from argonaut.document_types.document_type import DocumentType
 from argonaut.config.config import (
     GITHUB_PAGES_DEPLOYMENT_WORKFLOW_NAME,
     KICAD_TEMPLATE_REPO_OWNER,
@@ -26,7 +26,14 @@ from argonaut.config.config import (
     PROJECT_TRACKER_REPO_NAME,
     PROJECT_TRACKER_REPO_OWNER,
 )
-from argonaut.config.repo_secrets import REPO_SECRETS
+
+try:
+    from argonaut.config.repo_secrets import REPO_SECRETS
+except ImportError:
+    raise ImportError(
+        "Could not load repo secrets from config/repo_secrets. Have you copied "
+        "repo_secrets_example and filled in your data?"
+    )
 
 
 def init_pcb_folder(
