@@ -36,6 +36,22 @@ SUPPORTED_DOCUMENT_TYPES = sorted(
             init_function=init_minimal_folder,
         ),
         DocumentType(
+            "SWS",
+            "Software Snippet",
+            "Software Snippets",
+            Path("software_snippet"),
+            separate_repo=False,
+            init_function=init_minimal_folder,
+        ),
+        DocumentType(
+            "P",
+            "Presentation",
+            "Presentations",
+            Path("presentation"),
+            separate_repo=False,
+            init_function=init_minimal_folder,
+        ),
+        DocumentType(
             "FW",
             "Firmware Project",
             "Firmware Projects",
